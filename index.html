@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Travel Calculator</title>
+
+		<meta charset="utf-8">
+	   	<meta name="theme-color" content="#000" />
+		<meta name="title" content="Travel Calculator">
+		<meta name="application-name" content="André Vital">
+		<meta name="description" content="Travel Calculator">
+		<meta name="author" content="André Vital">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+		<!-- Favicon -->
+		<link rel="icon" type="image/ico" href="img/icons/favicon.ico">
+
+		<!-- PWA -->
+        <link rel="manifest" href="manifest.json">
+
+		<!-- CSS -->
+		<link rel="stylesheet" href="css/styles.css">
+	</head>
+	<body>
+		<label for="startTime" required>Hora de salida: </label>
+		<input type="time" id = "startTime">
+
+		<label for="speed" required>Velocidad (km/h): </label>
+		<input type="number" id = "speed">
+
+		<button id = "calcDistance">Calcular</button>
+
+		<p id="resultDistance"></p>
+		
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+		<script>
+			$('#calcDistance').click(function(){
+				var today = new Date();
+				var hours = parseInt(today.getHours()) * 60;
+				var mins = parseInt(today.getMinutes());
+
+				var currTime = hours + mins;
+
+				var start = $('#startTime').val();
+				var s = start.split(':');
+				var startTime = parseInt(s[0]) * 60 + parseInt(s[1]);
+
+				var transTime = currTime - startTime;
+
+				var currDistance = (transTime / 60) * parseInt($('#speed').val());
+
+				$('#resultDistance').html('<strong>Distancia recorrida: </strong>' + currDistance + " km");
+			});
+		</script>
+	</body>
+</html>
